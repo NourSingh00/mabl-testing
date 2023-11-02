@@ -19,5 +19,4 @@ jobs:
         with:
           application-id: nemqr6ycKxtz9pwVC9SkzA-a
           environment-id: eOeT6ZmytIThsXaj7lu3ug-e
-          plan-labels: |
-            github
+          plan-labels: github
