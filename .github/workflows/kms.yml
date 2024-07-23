@@ -25,3 +25,6 @@ jobs:
           continue-on-failure: true
           rebaseline-images: true
           set-static-baseline: true
+           # Runs plans matching ANY of the following labels AND the environment/application IDs above
+          plan-labels: |
+          github
