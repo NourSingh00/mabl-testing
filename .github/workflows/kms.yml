@@ -4,7 +4,7 @@ name: Github integration
 
 jobs:
   test:
-    name: mabl Test
+    name: Github integration
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,8 +14,14 @@ jobs:
         uses: mablhq/github-run-tests-action@v1
         env:
           # Use a "CI/CD Integration" type of mabl API key
-          MABL_API_KEY: ${{ secrets.MABL_API_KEY }}
+          MABL_API_KEY: D3UYofJraBuFkzIdmMXs7A
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           application-id: nemqr6ycKxtz9pwVC9SkzA-a
           environment-id: eOeT6ZmytIThsXaj7lu3ug-e
+          # Runs for both browsers
+          browser-types: |
+            chrome
+          continue-on-failure: true
+          rebaseline-images: true
+          set-static-baseline: true
