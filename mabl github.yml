@@ -1,3 +1,0 @@
-- name: Run mabl tests
-uses: mablhq/github-run-tests-action@v1.13.0
-            
