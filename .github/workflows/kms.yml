@@ -10,11 +10,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Functional test deployment
-        id: Github integration
+        id: Github-integration
         uses: mablhq/github-run-tests-action@v1
         env:
           # Use a "CI/CD Integration" type of mabl API key
-          MABL_API_KEY: ${{ secrets.MABL_API_KEY_Github }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           application-id: nemqr6ycKxtz9pwVC9SkzA-a
