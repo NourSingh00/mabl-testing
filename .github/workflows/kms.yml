@@ -1,57 +1,17 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Github integration
+on: [push]
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["KMS-Technology-bug"]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+name: KMS tech bug
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        
   test:
     name: mabl Test
     runs-on: ubuntu-latest
-    needs: deploy
     steps:
       - uses: actions/checkout@v4
 
       - name: Functional test deployment
         id: mabl-test-deployment
-        uses: mablhq/github-run-tests-action@v1.14
+        uses: mablhq/github-run-tests-action@v1
         env:
           # Use a "CI/CD Integration" type of mabl API key
           MABL_API_KEY: ${{ secrets.MABL_API_KEY }}
@@ -59,3 +19,9 @@ jobs:
         with:
           application-id: nemqr6ycKxtz9pwVC9SkzA-a
           environment-id: eOeT6ZmytIThsXaj7lu3ug-e
+          # Runs for both browsers
+          browser-types: |
+            chrome
+          continue-on-failure: true
+          rebaseline-images: true
+          set-static-baseline: true
